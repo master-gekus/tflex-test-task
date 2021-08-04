@@ -4,6 +4,8 @@ project(test_task LANGUAGES CXX)
 
 add_executable(${PROJECT_NAME}
 	main.cpp
+	app.h
+	app.cpp
 	)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
@@ -11,3 +13,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	CXX_STANDARD_REQUIRED ON
 	CXX_EXTENSIONS OFF
 	)
+
+configure_file(test_colors.txt test_colors.txt COPYONLY)
