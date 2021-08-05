@@ -8,6 +8,8 @@
 #include <list>
 #include <string>
 
+#include "color.h"
+
 struct app::cmd_entry
 {
 	const char* cmd_ {nullptr};
@@ -36,7 +38,14 @@ int app::exec() noexcept
 
 			if (const auto* cmd {look_for_command(command.c_str())}; nullptr != cmd)
 			{
-				(this->*cmd->method_)(command_line);
+				try
+				{
+					(this->*cmd->method_)(command_line);
+				}
+				catch (const std::exception& e)
+				{
+					std::cout << "Error executing command \"" << cmd->cmd_ << "\": " << e.what() << std::endl;
+				}
 			}
 		}
 	}
@@ -58,10 +67,10 @@ void app::cmd_pixel(std::stringstream& parameters)
 {
 	int x {0};
 	int y {0};
-	std::string color {};
-	parameters >> x >> y >> color;
+	color c {};
+	parameters >> x >> y >> c;
 
-	std::cout << "SetPixel(" << x << "," << y << "," << color << ");" << std::endl;
+	std::cout << "SetPixel(" << x << "," << y << "," << c << ");" << std::endl;
 }
 
 const app::cmd_entry* app::commands() noexcept

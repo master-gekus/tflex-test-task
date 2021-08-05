@@ -6,6 +6,8 @@ add_executable(${PROJECT_NAME}
 	main.cpp
 	app.h
 	app.cpp
+	color.h
+	color.cpp
 	)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
