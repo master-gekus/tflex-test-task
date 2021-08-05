@@ -8,6 +8,8 @@ add_executable(${PROJECT_NAME}
 	app.cpp
 	color.h
 	color.cpp
+	canvas.h
+	canvas.cpp
 	)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES

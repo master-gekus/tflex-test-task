@@ -1,5 +1,6 @@
 ; Test file
-    
+
+ca 78 24
 p 1 1 gray
 p 2 2 black
 p 3 3 red

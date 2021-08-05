@@ -63,14 +63,26 @@ int app::exec() noexcept
 	return 0;
 }
 
+void app::cmd_canvas(std::stringstream& parameters)
+{
+	int w {0};
+	int h {0};
+	color c {};
+	parameters >> w >> h >> c;
+
+	canvas_.reset(new canvas {w, h, c});
+}
+
 void app::cmd_pixel(std::stringstream& parameters)
 {
+	check_canvas();
+
 	int x {0};
 	int y {0};
 	color c {};
 	parameters >> x >> y >> c;
 
-	std::cout << "SetPixel(" << x << "," << y << "," << c << ");" << std::endl;
+	canvas_->set_pixel(x, y, c);
 }
 
 const app::cmd_entry* app::commands() noexcept
@@ -84,6 +96,9 @@ const app::cmd_entry* app::commands() noexcept
 
 		{"PIXEL", &app::cmd_pixel,
 		 "Set pixel (<X>,<Y>) to color <COLOR>", "<X> <Y> <COLOR>"},
+
+		{"CANVAS", &app::cmd_canvas,
+		 "Create canvas of size <W>x<H>", "<W> <H> [<BACKGROUN-COLOR>]"},
 
 		{}};
 	return commands_;
@@ -140,5 +155,13 @@ void app::cmd_help([[maybe_unused]] std::stringstream& parameters)
 			std::cout << "     " << c->desc_ << std::endl;
 		}
 		std::cout << std::endl;
+	}
+}
+
+inline void app::check_canvas()
+{
+	if (!canvas_)
+	{
+		throw std::runtime_error("Canvas not created.");
 	}
 }

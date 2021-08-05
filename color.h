@@ -55,7 +55,7 @@ inline std::istream& operator>>(std::istream& is, color& c)
 {
 	std::string str_color;
 	is >> str_color;
-	c = color {str_color};
+	c = str_color.empty() ? color {} : color {str_color};
 	return is;
 }
 
