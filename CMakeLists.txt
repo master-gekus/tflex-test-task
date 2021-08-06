@@ -32,4 +32,4 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 	CXX_EXTENSIONS OFF
 	)
 
-configure_file(test_colors.txt test_colors.txt COPYONLY)
+configure_file(test_palette_pixels.txt test_palette_pixels.txt COPYONLY)
