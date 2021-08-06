@@ -10,7 +10,21 @@ add_executable(${PROJECT_NAME}
 	color.cpp
 	canvas.h
 	canvas.cpp
+	output_device_factory.h
+	output_device_factory.cpp
+	output_device_interface.h
+	output_device_interface.cpp
+	output_device_console.h
+	output_device_console.cpp
 	)
+
+if (WIN32)
+	target_sources(${PROJECT_NAME} PRIVATE
+		output_device_console_win.h
+		output_device_console_win.cpp
+		)
+elseif(APPLE OR UNUX)
+endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	CXX_STANDARD 17

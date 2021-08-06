@@ -8,4 +8,4 @@ p 4 4 Lime
 p 5 5 BLUE
 p 6 6 #123456
 p 7 7 #f1c2E3
-
+o console

@@ -11,6 +11,17 @@ public:
 	canvas(int w, int h, color c);
 
 public:
+	[[nodiscard]] inline auto width() const noexcept
+	{
+		return width_;
+	}
+
+	[[nodiscard]] inline auto height() const noexcept
+	{
+		return height_;
+	}
+
+public:
 	void set_pixel(int x, int y, color c);
 	color get_pixel(int x, int y) const;
 

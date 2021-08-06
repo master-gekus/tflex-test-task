@@ -7,8 +7,12 @@
 #include <iostream>
 #include <list>
 #include <string>
+#include <memory>
 
 #include "color.h"
+#include "canvas.h"
+#include "output_device_factory.h"
+#include "output_device_interface.h"
 
 struct app::cmd_entry
 {
@@ -85,6 +89,18 @@ void app::cmd_pixel(std::stringstream& parameters)
 	canvas_->set_pixel(x, y, c);
 }
 
+void app::cmd_output(std::stringstream& parameters)
+{
+	check_canvas();
+
+	std::string device_name;
+	parameters >> device_name;
+
+	std::unique_ptr<output_device_interface> device {output_device_factory::create(device_name, parameters)};
+
+	device->output_canvas(canvas_.get());
+}
+
 const app::cmd_entry* app::commands() noexcept
 {
 	static const constexpr cmd_entry commands_[] = {
@@ -99,6 +115,9 @@ const app::cmd_entry* app::commands() noexcept
 
 		{"CANVAS", &app::cmd_canvas,
 		 "Create canvas of size <W>x<H>", "<W> <H> [<BACKGROUN-COLOR>]"},
+
+		{"OUTPUT", &app::cmd_output,
+		 "Output canvas to device <DEVICE> with optional <PARAMS>", "<DEVICE> [<PARAMS>]"},
 
 		{}};
 	return commands_;

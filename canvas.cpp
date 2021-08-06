@@ -3,6 +3,8 @@
 #include <stdexcept>
 
 canvas::canvas(int w, int h, color c)
+	: width_ {w}
+	, height_ {h}
 {
 	if ((1 > w) || (1920 < w) || (1 > h) || (1200 < h))
 	{
