@@ -23,7 +23,11 @@ if (WIN32)
 		output_device_console_win.h
 		output_device_console_win.cpp
 		)
-elseif(APPLE OR UNUX)
+elseif(UNIX)
+	target_sources(${PROJECT_NAME} PRIVATE
+		output_device_console_ansi.h
+		output_device_console_ansi.cpp
+		)
 endif()
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
