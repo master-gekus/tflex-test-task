@@ -69,13 +69,8 @@ void output_device_console_win::set_console_attr(color c)
 	const uint8_t r {c.red()};
 	const uint8_t g {c.green()};
 	const uint8_t b {c.blue()};
-
-	const bool ri {r > 128};
-	const bool gi {g > 128};
-	const bool bi {b > 128};
-
-	const bool is_intensified {ri || gi || bi};
-	uint8_t limit {static_cast<uint8_t>(is_intensified ? 192 : 64)};
+	const bool is_intensified {(r > 128) || (g > 128) || (b > 128)};
+	const uint8_t limit {static_cast<uint8_t>(is_intensified ? 192 : 64)};
 
 	WORD attr {0};
 	if (r > limit)

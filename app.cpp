@@ -89,6 +89,20 @@ void app::cmd_pixel(std::stringstream& parameters)
 	canvas_->set_pixel(x, y, c);
 }
 
+void app::cmd_box(std::stringstream& parameters)
+{
+	check_canvas();
+
+	int x1 {0};
+	int y1 {0};
+	int x2 {0};
+	int y2 {0};
+	color c {};
+	parameters >> x1 >> y1 >> x2 >> y2 >> c;
+
+	canvas_->box(x1, y1, x2, y2, c);
+}
+
 void app::cmd_output(std::stringstream& parameters)
 {
 	check_canvas();
@@ -110,11 +124,14 @@ const app::cmd_entry* app::commands() noexcept
 		{"?", &app::cmd_help,
 		 "Same as \"HELP\""},
 
-		{"PIXEL", &app::cmd_pixel,
-		 "Set pixel (<X>,<Y>) to color <COLOR>", "<X> <Y> <COLOR>"},
-
 		{"CANVAS", &app::cmd_canvas,
 		 "Create canvas of size <W>x<H>", "<W> <H> [<BACKGROUN-COLOR>]"},
+
+		{"PIXEL", &app::cmd_pixel,
+		 "Set pixel (<X>,<Y>) to color <COLOR>", "<X> <Y> [<COLOR>]"},
+
+		{"BOX", &app::cmd_box,
+		 "Draws box from (<X1>,<Y1>) to (<X2>,<Y2>) with color <COLOR>", "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
 
 		{"OUTPUT", &app::cmd_output,
 		 "Output canvas to device <DEVICE> with optional <PARAMS>", "<DEVICE> [<PARAMS>]"},

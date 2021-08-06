@@ -1,5 +1,6 @@
 #include "canvas.h"
 
+#include <algorithm>
 #include <stdexcept>
 
 canvas::canvas(int w, int h, color c)
@@ -32,4 +33,20 @@ color canvas::get_pixel(int x, int y) const
 	}
 
 	return pixels_[(y * width_) + x];
+}
+
+void canvas::box(int x1, int y1, int x2, int y2, color c)
+{
+	int xmin {std::min(x1, x2)};
+	int xmax {std::max(x1, x2)};
+	int ymin {std::min(y1, y2)};
+	int ymax {std::max(y1, y2)};
+
+	for (int y = ymin; y <= ymax; ++y)
+	{
+		for (int x = xmin; x <= xmax; ++x)
+		{
+			set_pixel(x, y, c);
+		}
+	}
 }

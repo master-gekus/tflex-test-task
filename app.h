@@ -18,7 +18,10 @@ public:
 
 private:
 	void cmd_help(std::stringstream& parameters);
+
 	void cmd_pixel(std::stringstream& parameters);
+	void cmd_box(std::stringstream& parameters);
+
 	void cmd_canvas(std::stringstream& parameters);
 	void cmd_output(std::stringstream& parameters);
 

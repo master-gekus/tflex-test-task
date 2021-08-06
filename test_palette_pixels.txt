@@ -1,6 +1,7 @@
 ; Type ";" in start of line to make a comment
 
 ca 78 24
+
 p 0 0 #000000
 p 1 0 #800000
 p 2 0 #008000
