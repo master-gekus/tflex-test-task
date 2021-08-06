@@ -21,6 +21,8 @@ void output_device_console_ansi::restore_console_attr()
 
 void output_device_console_ansi::set_console_attr(color c)
 {
+	// https://en.wikipedia.org/wiki/ANSI_escape_code
+
 	const uint8_t r {c.red()};
 	const uint8_t g {c.green()};
 	const uint8_t b {c.blue()};
