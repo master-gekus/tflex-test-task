@@ -6,11 +6,11 @@
 #include <algorithm>
 #include <iostream>
 #include <list>
-#include <string>
 #include <memory>
+#include <string>
 
-#include "color.h"
 #include "canvas.h"
+#include "color.h"
 #include "output_device_factory.h"
 #include "output_device_interface.h"
 
@@ -100,7 +100,21 @@ void app::cmd_box(std::stringstream& parameters)
 	color c {};
 	parameters >> x1 >> y1 >> x2 >> y2 >> c;
 
-	canvas_->box(x1, y1, x2, y2, c);
+	canvas_->box(x1, y1, x2, y2, c, false);
+}
+
+void app::cmd_bar(std::stringstream& parameters)
+{
+	check_canvas();
+
+	int x1 {0};
+	int y1 {0};
+	int x2 {0};
+	int y2 {0};
+	color c {};
+	parameters >> x1 >> y1 >> x2 >> y2 >> c;
+
+	canvas_->box(x1, y1, x2, y2, c, true);
 }
 
 void app::cmd_output(std::stringstream& parameters)
@@ -130,8 +144,13 @@ const app::cmd_entry* app::commands() noexcept
 		{"PIXEL", &app::cmd_pixel,
 		 "Set pixel (<X>,<Y>) to color <COLOR>", "<X> <Y> [<COLOR>]"},
 
+		{"BAR", &app::cmd_bar,
+		 "Draws bar (filled rectangle) from (<X1>,<Y1>) to (<X2>,<Y2>) with color <COLOR>",
+		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
+
 		{"BOX", &app::cmd_box,
-		 "Draws box from (<X1>,<Y1>) to (<X2>,<Y2>) with color <COLOR>", "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
+		 "Draws box (non-filled rectangle) from (<X1>,<Y1>) to (<X2>,<Y2>) with color <COLOR>",
+		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
 
 		{"OUTPUT", &app::cmd_output,
 		 "Output canvas to device <DEVICE> with optional <PARAMS>", "<DEVICE> [<PARAMS>]"},

@@ -35,7 +35,7 @@ color canvas::get_pixel(int x, int y) const
 	return pixels_[(y * width_) + x];
 }
 
-void canvas::box(int x1, int y1, int x2, int y2, color c)
+void canvas::box(int x1, int y1, int x2, int y2, color c, bool filled)
 {
 	int xmin {std::min(x1, x2)};
 	int xmax {std::max(x1, x2)};
@@ -46,7 +46,10 @@ void canvas::box(int x1, int y1, int x2, int y2, color c)
 	{
 		for (int x = xmin; x <= xmax; ++x)
 		{
-			set_pixel(x, y, c);
+			if (filled || (x == x1) || (x == x2) || (y == y1) || (y == y2))
+			{
+				set_pixel(x, y, c);
+			}
 		}
 	}
 }

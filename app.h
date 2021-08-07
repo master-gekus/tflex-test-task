@@ -20,6 +20,7 @@ private:
 	void cmd_help(std::stringstream& parameters);
 
 	void cmd_pixel(std::stringstream& parameters);
+	void cmd_bar(std::stringstream& parameters);
 	void cmd_box(std::stringstream& parameters);
 
 	void cmd_canvas(std::stringstream& parameters);

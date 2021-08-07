@@ -1,28 +1,28 @@
 ; Type ";" in start of line to make a comment
 
-ca 66 24
+canvas 66 24
 
 ; Pseudo-gradient background
-b 0 6 78 11 gray
-b 0 12 78 17 silver
-b 0 18 78 23 white
+bar 0 6 78 11 gray
+bar 0 12 78 17 silver
+bar 0 18 78 23 white
 
-b 1  1  3  22 #000000
-b 5  1  7  22 #800000
-b 9  1  11 22 #008000
-b 13 1  15 22 #000080
-b 17 1  19 22 #808000
-b 21 1  23 22 #008080
-b 25 1  27 22 #800080
-b 29 1  31 22 #808080
+box 1  1  3  22 #000000
+box 5  1  7  22 #800000
+box 9  1  11 22 #008000
+box 13 1  15 22 #000080
+box 17 1  19 22 #808000
+box 21 1  23 22 #008080
+box 25 1  27 22 #800080
+box 29 1  31 22 #808080
 
-b 34 1  36 22 #C0C0C0
-b 38 1  40 22 #FF0000
-b 42 1  44 22 #00FF00
-b 46 1  48 22 #0000FF
-b 50 1  52 22 #FFFF00
-b 54 1  56 22 #00FFFF
-b 58 1  60 22 #FF00FF
-b 62 1  64 22 #FFFFFF
+box 34 1  36 22 #C0C0C0
+box 38 1  40 22 #FF0000
+box 42 1  44 22 #00FF00
+box 46 1  48 22 #0000FF
+box 50 1  52 22 #FFFF00
+box 54 1  56 22 #00FFFF
+box 58 1  60 22 #FF00FF
+box 62 1  64 22 #FFFFFF
 
-o console
+output console

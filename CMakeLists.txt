@@ -38,3 +38,5 @@ set_target_properties(${PROJECT_NAME} PROPERTIES
 
 configure_file(test_palette_pixels.txt test_palette_pixels.txt COPYONLY)
 configure_file(test_palette_boxes.txt test_palette_boxes.txt COPYONLY)
+configure_file(test_palette_bars.txt test_palette_bars.txt COPYONLY)
+configure_file(test_lines.txt test_lines.txt COPYONLY)
