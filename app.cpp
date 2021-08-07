@@ -117,6 +117,20 @@ void app::cmd_bar(std::stringstream& parameters)
 	canvas_->box(x1, y1, x2, y2, c, true);
 }
 
+void app::cmd_line(std::stringstream &parameters)
+{
+	check_canvas();
+
+	int x1 {0};
+	int y1 {0};
+	int x2 {0};
+	int y2 {0};
+	color c {};
+	parameters >> x1 >> y1 >> x2 >> y2 >> c;
+
+	canvas_->line(x1, y1, x2, y2, c);
+}
+
 void app::cmd_output(std::stringstream& parameters)
 {
 	check_canvas();
@@ -145,11 +159,15 @@ const app::cmd_entry* app::commands() noexcept
 		 "Set pixel (<X>,<Y>) to color <COLOR>", "<X> <Y> [<COLOR>]"},
 
 		{"BAR", &app::cmd_bar,
-		 "Draws bar (filled rectangle) from (<X1>,<Y1>) to (<X2>,<Y2>) with color <COLOR>",
+		 "Draws bar (filled rectangle) from (<X1>,<Y1>) to (<X2>,<Y2>) of color <COLOR>",
 		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
 
 		{"BOX", &app::cmd_box,
-		 "Draws box (non-filled rectangle) from (<X1>,<Y1>) to (<X2>,<Y2>) with color <COLOR>",
+		 "Draws box (non-filled rectangle) from (<X1>,<Y1>) to (<X2>,<Y2>) of color <COLOR>",
+		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
+
+		{"LINE", &app::cmd_line,
+		 "Draws line from (<X1>,<Y1>) to (<X2>,<Y2>) of color <COLOR>",
 		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
 
 		{"OUTPUT", &app::cmd_output,

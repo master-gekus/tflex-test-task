@@ -4,11 +4,14 @@
 
 # Примеры выполнения:
 
-### test_palette_pixels.txt
+### test_task < test_palette_pixels.txt
 ![test_palette_pixels.png](test_palette_pixels.png)
 
-### test_palette_bars.txt 
+### test_task < test_palette_bars.txt 
 ![test_palette_bars.png](test_palette_bars.png)
 
-### test_palette_boxes.txt
+### test_task < test_palette_boxes.txt
 ![test_palette_boxes.png](test_palette_boxes.png)
+
+### test_task < test_lines.txt
+![test_lines.png](test_lines.png)

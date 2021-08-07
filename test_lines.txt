@@ -1,40 +1,17 @@
 ; Type ";" in start of line to make a comment
 
-ca 78 24
+canvas 78 24
 
-p 0 0 #000000
-p 1 0 #800000
-p 2 0 #008000
-p 3 0 #000080
-p 4 0 #808000
-p 5 0 #008080
-p 6 0 #800080
-p 7 0 #808080
+bar 0 0 77 23 White
+; box 0 0 77 23 Teal
+line 0 0 77 23 Teal
+line 77 0 0 23 Teal
+box 0 0 77 23 Blue
 
-p 8 0 #C0C0C0
-p 9 0 #FF0000
-p 10 0 #00FF00
-p 11 0 #0000FF
-p 12 0 #FFFF00
-p 13 0 #00FFFF
-p 14 0 #FF00FF
-p 15 0 #FFFFFF
+line 20 3 38 8 Red
+line 39 8 58 3 Red
 
-p 1 1 #000000
-p 1 2 #800000
-p 1 3 #008000
-p 1 4 #000080
-p 1 5 #808000
-p 1 6 #008080
-p 1 7 #800080
-p 1 8 #808080
+line 20 1 38 6 Green
+line 39 6 58 1 Green
 
-p 3 1 #C0C0C0
-p 3 2 #FF0000
-p 3 3 #00FF00
-p 3 4 #0000FF
-p 3 5 #FFFF00
-p 3 6 #00FFFF
-p 3 7 #FF00FF
-p 3 8 #FFFFFF
-o console
+output console

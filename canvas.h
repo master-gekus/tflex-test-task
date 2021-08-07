@@ -26,6 +26,7 @@ public:
 	color get_pixel(int x, int y) const;
 
 	void box(int x1, int y1, int x2, int y2, color c, bool filled);
+	void line(int x1, int y1, int x2, int y2, color c);
 private:
 	int width_;
 	int height_;
