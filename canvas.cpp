@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include <algorithm>
+#include <map>
 #include <stdexcept>
 
 #include "color.h"
@@ -23,6 +24,50 @@ public:
 	}
 
 public:
+	class pixel_range
+	{
+	public:
+		inline pixel_range(int x) noexcept
+			: left_ {x}
+			, right_ {x}
+		{
+		}
+
+		pixel_range(const pixel_range&) = default;
+		pixel_range(pixel_range&&) = default;
+		pixel_range& operator=(const pixel_range&) = default;
+		pixel_range& operator=(pixel_range&&) = default;
+
+		[[nodiscard]] int left() const noexcept
+		{
+			return left_;
+		}
+
+		[[nodiscard]] int right() const noexcept
+		{
+			return right_;
+		}
+
+		inline pixel_range& operator+=(int x) noexcept
+		{
+			if (left_ > x)
+			{
+				left_ = x;
+			}
+
+			if (right_ < x)
+			{
+				right_ = x;
+			}
+			return *this;
+		}
+
+	private:
+		int left_;
+		int right_;
+	};
+	using pixel_ranges = std::map<int, pixel_range>;
+
 	[[nodiscard]] inline int width() const noexcept
 	{
 		return width_;
@@ -51,6 +96,52 @@ public:
 		}
 
 		return pixels_[(y * width_) + x];
+	}
+
+	inline void draw_ranges(const pixel_ranges& ranges, color c)
+	{
+		for (const auto& r : ranges)
+		{
+			for (int x = r.second.left(); x <= r.second.right(); ++x)
+			{
+				set_pixel(x, r.first, c);
+			}
+		}
+	}
+
+	static void line_(pixel_ranges& ranges, int x1, int y1, int x2, int y2)
+	{
+		int dx {std::abs(x2 - x1)};
+		int sx {(x1 < x2) ? 1 : -1};
+		int dy {-std::abs(y2 - y1)};
+		int sy {(y1 < y2) ? 1 : -1};
+		int err {dx + dy};
+
+		while (true)
+		{
+			if (auto res {ranges.try_emplace(y1, x1)}; !res.second)
+			{
+				res.first->second += x1;
+			}
+
+			if ((x1 == x2) && (y1 == y2))
+			{
+				break;
+			}
+
+			int e2 {2 * err};
+			if (e2 >= dy)
+			{
+				err += dy;
+				x1 += sx;
+			}
+
+			if (e2 <= dx)
+			{
+				err += dx;
+				y1 += sy;
+			}
+		}
 	}
 
 private:
@@ -109,31 +200,7 @@ void canvas::box(int x1, int y1, int x2, int y2, color c, bool filled)
 
 void canvas::line(int x1, int y1, int x2, int y2, color c)
 {
-	int dx {std::abs(x2 - x1)};
-	int sx {(x1 < x2) ? 1 : -1};
-	int dy {-std::abs(y2 - y1)};
-	int sy {(y1 < y2) ? 1 : -1};
-	int err {dx + dy};
-
-	while (true)
-	{
-		set_pixel(x1, y1, c);
-		if ((x1 == x2) && (y1 == y2))
-		{
-			break;
-		}
-
-		int e2 {2 * err};
-		if (e2 >= dy)
-		{
-			err += dy;
-			x1 += sx;
-		}
-
-		if (e2 <= dx)
-		{
-			err += dx;
-			y1 += sy;
-		}
-	}
+	data::pixel_ranges ranges;
+	data::line_(ranges, x1, y1, x2, y2);
+	data_->draw_ranges(ranges, c);
 }
