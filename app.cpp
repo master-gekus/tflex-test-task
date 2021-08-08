@@ -117,7 +117,7 @@ void app::cmd_bar(std::stringstream& parameters)
 	canvas_->box(x1, y1, x2, y2, c, true);
 }
 
-void app::cmd_line(std::stringstream &parameters)
+void app::cmd_line(std::stringstream& parameters)
 {
 	check_canvas();
 
@@ -129,6 +129,20 @@ void app::cmd_line(std::stringstream &parameters)
 	parameters >> x1 >> y1 >> x2 >> y2 >> c;
 
 	canvas_->line(x1, y1, x2, y2, c);
+}
+
+void app::cmd_triangle(std::stringstream& parameters)
+{
+	int x1 {0};
+	int y1 {0};
+	int x2 {0};
+	int y2 {0};
+	int x3 {0};
+	int y3 {0};
+	color c {};
+	parameters >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> c;
+
+	canvas_->triangle(x1, y1, x2, y2, x3, y3, c);
 }
 
 void app::cmd_output(std::stringstream& parameters)
@@ -169,6 +183,10 @@ const app::cmd_entry* app::commands() noexcept
 		{"LINE", &app::cmd_line,
 		 "Draws line from (<X1>,<Y1>) to (<X2>,<Y2>) of color <COLOR>",
 		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
+
+		{"TRIANGLE", &app::cmd_triangle,
+		 "Draws filled triangle with agles in (<X1>,<Y1>), (<X2>,<Y2>), (<X3>,<Y3>) of color <COLOR>",
+		 "<X1> <Y1> <X2> <Y2> <X3> <Y3> [<COLOR>]"},
 
 		{"OUTPUT", &app::cmd_output,
 		 "Output canvas to device <DEVICE> with optional <PARAMS>", "<DEVICE> [<PARAMS>]"},

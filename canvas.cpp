@@ -204,3 +204,12 @@ void canvas::line(int x1, int y1, int x2, int y2, color c)
 	data::line_(ranges, x1, y1, x2, y2);
 	data_->draw_ranges(ranges, c);
 }
+
+void canvas::triangle(int x1, int y1, int x2, int y2, int x3, int y3, color c)
+{
+	data::pixel_ranges ranges;
+	data::line_(ranges, x1, y1, x2, y2);
+	data::line_(ranges, x1, y1, x3, y3);
+	data::line_(ranges, x2, y2, x3, y3);
+	data_->draw_ranges(ranges, c);
+}

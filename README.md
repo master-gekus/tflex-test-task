@@ -15,3 +15,6 @@
 
 ### test_task < test_lines.txt
 ![test_lines.png](images/test_lines.png)
+
+### test_task < test_triangles.txt
+![test_triangles.png](images/test_triangles.png)

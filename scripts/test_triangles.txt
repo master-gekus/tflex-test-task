@@ -1,0 +1,20 @@
+; Type ";" in start of line to make a comment
+
+canvas 77 24
+
+bar 0 0 76 23 White
+box 0 0 76 23 Teal
+
+triangle 19 5 38 10 57 5 Blue
+triangle 19 3 38 8 57 3 Green
+triangle 19 1 38 6 57 1 Red
+
+triangle 34 22 38 11 42 22 Olive
+
+triangle 1 1 35 12 20 16 Fuchsia
+triangle 1 3 18 17 14 22 Purple
+
+triangle 75 1 41 12 56 16 Fuchsia
+triangle 75 3 58 17 62 22 Purple
+
+output console
