@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "canvas.h"
+#include "color.h"
 
 void output_device_console::output_canvas(const canvas* c)
 {

@@ -3,34 +3,28 @@
 
 #include <memory>
 
-#include "color.h"
+class color;
 
-class canvas
+class canvas final
 {
 public:
 	canvas(int w, int h, color c);
+	~canvas();
 
 public:
-	[[nodiscard]] inline auto width() const noexcept
-	{
-		return width_;
-	}
-
-	[[nodiscard]] inline auto height() const noexcept
-	{
-		return height_;
-	}
+	[[nodiscard]] int width() const;
+	[[nodiscard]] int height() const;
 
 public:
 	void set_pixel(int x, int y, color c);
-	color get_pixel(int x, int y) const;
+	[[nodiscard]] color get_pixel(int x, int y) const;
 
 	void box(int x1, int y1, int x2, int y2, color c, bool filled);
 	void line(int x1, int y1, int x2, int y2, color c);
+
 private:
-	int width_;
-	int height_;
-	std::unique_ptr<color[]> pixels_;
+	class data;
+	std::unique_ptr<data> data_;
 };
 
 #endif // CANVAS_H
