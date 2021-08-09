@@ -18,3 +18,6 @@
 
 ### test_task < test_triangles.txt
 ![test_triangles.png](images/test_triangles.png)
+
+### test_task < test_ellipses.txt
+![test_ellipses.png](images/test_ellipses.png)

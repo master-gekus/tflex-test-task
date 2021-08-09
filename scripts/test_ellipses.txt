@@ -1,0 +1,47 @@
+; Type ";" in start of line to make a comment
+
+canvas 77 24
+
+; bar 0 0 76 23 White
+; box 0 0 76 23 Teal
+
+ellipse 0 0 5 2 Red
+fellipse 7 0 12 2 Red
+
+ellipse 14 0 25 2 Green
+fellipse 27 0 38 2 Green
+
+ellipse 40 0 57 2 Blue
+fellipse 59 0 76 2 Blue
+
+
+ellipse 0 3 5 8 #808000
+fellipse 7 3 12 8 #808000
+
+ellipse 14 3 25 8 #008080
+fellipse 27 3 38 8 #008080
+
+ellipse 40 3 57 8 #800080
+fellipse 59 3 76 8 #800080
+
+
+ellipse 0 9 5 17 Gray
+fellipse 7 9 12 17 Gray
+
+ellipse 14 9 25 17 Silver
+fellipse 27 9 38 17 Silver
+
+ellipse 40 9 57 17 White
+fellipse 59 9 76 17 White
+
+
+ellipse 0 18 5 29 #800000
+fellipse 7 18 12 29 #800000
+
+ellipse 14 18 25 29 #008000
+fellipse 27 18 38 29 #008000
+
+ellipse 40 18 57 29 #000080
+fellipse 59 18 76 29 #000080
+
+output console

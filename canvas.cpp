@@ -98,14 +98,19 @@ public:
 		return pixels_[(y * width_) + x];
 	}
 
+	inline void draw_range(int xleft, int xright, int y, color c)
+	{
+		for (int x = xleft; x <= xright; ++x)
+		{
+			set_pixel(x, y, c);
+		}
+	}
+
 	inline void draw_ranges(const pixel_ranges& ranges, color c)
 	{
 		for (const auto& r : ranges)
 		{
-			for (int x = r.second.left(); x <= r.second.right(); ++x)
-			{
-				set_pixel(x, r.first, c);
-			}
+			draw_range(r.second.left(), r.second.right(), r.first, c);
 		}
 	}
 
@@ -212,4 +217,92 @@ void canvas::triangle(int x1, int y1, int x2, int y2, int x3, int y3, color c)
 	data::line_(ranges, x1, y1, x3, y3);
 	data::line_(ranges, x2, y2, x3, y3);
 	data_->draw_ranges(ranges, c);
+}
+
+void canvas::ellipse(int x0, int y0, int x1, int y1, color c, bool fill)
+{
+	// This algorithm was just taken from:
+	// https://stackoverflow.com/questions/2914807/plot-ellipse-from-rectangle
+	// It doesn't work quite correctly (at least, it seems to me), but I have
+	// neither the time nor the desire to understand it in detail.
+
+	// Calculate height
+	int yb {(y0 + y1) / 2};
+	int yc {yb};
+	int qb {(y0 < y1) ? (y1 - y0) : (y0 - y1)};
+	int qy {qb};
+	int dy {qb / 2};
+	if (0 != (qb % 2))
+	{ // Bounding box has even pixel height
+		++yc;
+	}
+
+	// Calculate width
+	int xb {(x0 + x1) / 2};
+	int xc {xb};
+	int qa {(x0 < x1) ? (x1 - x0) : (x0 - x1)};
+	int qx {qa % 2};
+	int dx {0};
+	int qt {(qa * qa) + (qb * qb) - (2 * qa * qa * qb)};
+	if (0 != qx)
+	{ // Bounding box has even pixel width
+		++xc;
+		qt += 3L * qb * qb;
+	}
+
+	while ((qy >= 0) && (qx <= qa))
+	{
+		if (!fill)
+		{
+			data_->set_pixel(xb - dx, yb - dy, c);
+			if (dx != 0 || xb != xc)
+			{
+				data_->set_pixel(xc + dx, yb - dy, c);
+				if (dy != 0 || yb != yc)
+					data_->set_pixel(xc + dx, yc + dy, c);
+			}
+			if (dy != 0 || yb != yc)
+			{
+				data_->set_pixel(xb - dx, yc + dy, c);
+			}
+		}
+
+		if (((qt + (2 * qb * qb * qx) + (3 * qb * qb)) <= 0)
+			|| ((qt + (2 * qa * qa * qy) - (qa * qa)) <= 0))
+		{
+			qt += ((8 * qb * qb) + (4 * qb * qb * qx));
+			dx++;
+			qx += 2;
+		}
+		else if ((qt - (2 * qa * qa * qy) + (3 * qa * qa)) > 0)
+		{
+			if (fill)
+			{
+				data_->draw_range(xb - dx, xc + dx, yc + dy, c);
+				if ((dy != 0) || (yb != yc))
+				{
+					data_->draw_range(xb - dx, xc + dx, yb - dy, c);
+				}
+			}
+			qt += ((8 * qa * qa) - (4 * qa * qa * qy));
+			dy--;
+			qy -= 2;
+		}
+		else
+		{
+			if (fill)
+			{
+				data_->draw_range(xb - dx, xc + dx, yc + dy, c);
+				if (dy != 0 || yb != yc)
+				{
+					data_->draw_range(xb - dx, xc + dx, yb - dy, c);
+				}
+			}
+			qt += ((8 * qb * qb) + (4 * qb * qb * qx) + (8 * qa * qa) - (4 * qa * qa * qy));
+			dx++;
+			qx += 2;
+			dy--;
+			qy -= 2;
+		}
+	}
 }

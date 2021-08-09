@@ -24,6 +24,8 @@ private:
 	void cmd_box(std::stringstream& parameters);
 	void cmd_line(std::stringstream& parameters);
 	void cmd_triangle(std::stringstream& parameters);
+	void cmd_ellipse(std::stringstream& parameters);
+	void cmd_fellipse(std::stringstream& parameters);
 
 	void cmd_canvas(std::stringstream& parameters);
 	void cmd_output(std::stringstream& parameters);

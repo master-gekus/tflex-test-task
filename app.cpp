@@ -117,6 +117,34 @@ void app::cmd_bar(std::stringstream& parameters)
 	canvas_->box(x1, y1, x2, y2, c, true);
 }
 
+void app::cmd_ellipse(std::stringstream& parameters)
+{
+	check_canvas();
+
+	int x1 {0};
+	int y1 {0};
+	int x2 {0};
+	int y2 {0};
+	color c {};
+	parameters >> x1 >> y1 >> x2 >> y2 >> c;
+
+	canvas_->ellipse(x1, y1, x2, y2, c, false);
+}
+
+void app::cmd_fellipse(std::stringstream& parameters)
+{
+	check_canvas();
+
+	int x1 {0};
+	int y1 {0};
+	int x2 {0};
+	int y2 {0};
+	color c {};
+	parameters >> x1 >> y1 >> x2 >> y2 >> c;
+
+	canvas_->ellipse(x1, y1, x2, y2, c, true);
+}
+
 void app::cmd_line(std::stringstream& parameters)
 {
 	check_canvas();
@@ -187,6 +215,14 @@ const app::cmd_entry* app::commands() noexcept
 		{"TRIANGLE", &app::cmd_triangle,
 		 "Draws filled triangle with agles in (<X1>,<Y1>), (<X2>,<Y2>), (<X3>,<Y3>) of color <COLOR>",
 		 "<X1> <Y1> <X2> <Y2> <X3> <Y3> [<COLOR>]"},
+
+		{"ELLIPSE", &app::cmd_ellipse,
+		 "Draws non-filled ellipse bounded by rectangle from (<X1>,<Y1>) to (<X2>,<Y2>) of color <COLOR>",
+		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
+
+		{"FELLIPSE", &app::cmd_fellipse,
+		 "Draws filled ellipse bounded by rectangle from (<X1>,<Y1>) to (<X2>,<Y2>) of color <COLOR>",
+		 "<X1> <Y1> <X2> <Y2> [<COLOR>]"},
 
 		{"OUTPUT", &app::cmd_output,
 		 "Output canvas to device <DEVICE> with optional <PARAMS>", "<DEVICE> [<PARAMS>]"},
